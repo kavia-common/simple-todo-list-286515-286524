@@ -18,6 +18,21 @@ In the project directory, you can run:
 Runs the app in development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
+Backend integration:
+- By default, the frontend will call the backend at http://localhost:3001 (see `src/api.js`).
+- Option A (recommended in dev): package.json sets `"proxy": "http://localhost:3001"` so browser requests to `/todos` are proxied.
+- Option B: set an explicit API host via env: `REACT_APP_API_URL=http://localhost:3001 npm start`.
+
+End-to-end checklist:
+1) Start backend: `uvicorn src.api.main:app --host 0.0.0.0 --port 3001` (see backend README)
+2) Start frontend: `npm start`
+3) In the UI:
+   - Create a todo
+   - Edit the todo (change title/description)
+   - Toggle complete
+   - Delete the todo
+   All actions should persist and reflect after reload.
+
 ### `npm test`
 
 Launches the test runner in interactive watch mode.
